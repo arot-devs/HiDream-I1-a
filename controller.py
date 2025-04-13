@@ -73,7 +73,7 @@ def generate():
     for _ in range(2):  # try twice
         worker = get_next_worker()
         try:
-            resp = requests.post(worker["url"], json=req_json, timeout=60)
+            resp = requests.post(worker["url"], json=req_json, timeout=60*5)
             return jsonify(resp.json())
         except Exception as e:
             print(f"Worker {worker['gpu']} failed: {e}")

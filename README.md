@@ -31,13 +31,13 @@ python gradio_demo.py
 ```
 
 
-## Running Service
+## Running Batch Gen
 
 ```bash
-# spawning workers; change sh to set number of gpus
-./spwan_workers.sh
+# controller will start 4 GPU workers, each taking a card (modify if needed)
+python controller.py
 
-# starting controller
+# generator takes a txt, sends requests to controller and saves results to outputs/
 
 
 
