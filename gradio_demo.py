@@ -6,8 +6,8 @@ from hi_diffusers.schedulers.fm_solvers_unipc import FlowUniPCMultistepScheduler
 from hi_diffusers.schedulers.flash_flow_match import FlashFlowMatchEulerDiscreteScheduler
 from transformers import LlamaForCausalLM, PreTrainedTokenizerFast
 
-MODEL_PREFIX = "HiDream-ai"
-LLAMA_MODEL_NAME = "meta-llama/Meta-Llama-3.1-8B-Instruct"
+MODEL_PREFIX = "./"
+LLAMA_MODEL_NAME = "Meta-Llama-3.1-8B-Instruct"
 
 # Model configurations
 MODEL_CONFIGS = {
