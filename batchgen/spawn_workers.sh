@@ -2,9 +2,13 @@
 
 # ==============
 
-# Launches N workers of HiDream-I1 to be used with controller.
+# Usage: 
 
-# Usage:                       ./spawn_workers.sh
+# Launches N workers of HiDream-I1 to be used with controller.
+# (usually, just run python batchgen/controller.py and processes will be managed by controller.)
+# (this one is here just in case)
+
+# Usage:                       ./batchgen/spawn_workers.sh
 # To stop all workers, use:    pkill -f worker.py
 
 # ==============

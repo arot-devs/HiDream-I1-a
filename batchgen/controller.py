@@ -1,24 +1,40 @@
-# controller.py
 import subprocess, requests, time, threading
 from flask import Flask, request, jsonify
 from queue import Queue
 from uuid import uuid4
+import os, pathlib
 
 NUM_GPUS = 4
 WORKERS = []
 PORTS = [8001 + i for i in range(NUM_GPUS)]
+worker_path = str(pathlib.Path(__file__).resolve().parent / "worker.py")
 
-# Start workers
-for i, port in enumerate(PORTS):
-    WORKERS.append({
+from concurrent.futures import ThreadPoolExecutor
+import subprocess, os
+
+def launch_worker(i, port):
+    return {
         "gpu": i,
         "port": port,
         "url": f"http://127.0.0.1:{port}/generate",
         "proc": subprocess.Popen(
-            ["python", "worker.py"],
-            env={**os.environ, "GPU": str(i), "PORT": str(port)}
+            ["python", worker_path],
+            env={
+                **os.environ,
+                "PORT": str(port),
+                "CUDA_VISIBLE_DEVICES": str(i)
+            }
         )
-    })
+    }
+
+# Concurrently launch workers
+with ThreadPoolExecutor() as executor:
+    futures = [
+        executor.submit(launch_worker, i, port)
+        for i, port in enumerate(PORTS)
+    ]
+    WORKERS = [f.result() for f in futures]
+
 
 # Round-robin load balancer
 next_worker = 0
