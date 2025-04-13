@@ -30,3 +30,14 @@ pip install sentencepiece
 python gradio_demo.py
 ```
 
+
+## Running Service
+
+```bash
+# spawning workers; change sh to set number of gpus
+./spwan_workers.sh
+
+# starting controller
+
+
+
